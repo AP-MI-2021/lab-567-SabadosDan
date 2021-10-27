@@ -13,6 +13,15 @@ def test_add_rezervare():
     assert get_checkin(get_by_id("1",lista)) == "da"
 
 
+def test_get_by_id():
+    lista = []
+    lista = add_rezervare("1", "Pop Maria", "economy plus", 199.5, "da", lista)
+    lista = add_rezervare("2", "Antal Marius", "economy", 150, "da", lista)
+
+    assert get_by_id("1", lista) == ("1", "Pop Maria", "economy plus", 199.5, "da")
+    assert get_by_id("2", lista) == ("2", "Antal Marius", "economy", 150, "da")
+    assert get_by_id("3", lista) is None
+
 def test_delete_rezervare():
     lista = []
     lista = add_rezervare("1", "Pop Maria", "economy plus", 199.5, "da", lista)
