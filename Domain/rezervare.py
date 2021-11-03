@@ -8,13 +8,13 @@ def creeaza_rezervare(id, nume, clasa, pret, checkin_facut):
     :param checkin_facut: string
     :return: un dictionar ce contine o rezervare
     '''
-    return (
+    return [
         id,
         nume,
         clasa,
         pret,
         checkin_facut
-    )
+    ]
 
 
 def get_id(rezervare):

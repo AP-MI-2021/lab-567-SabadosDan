@@ -18,8 +18,8 @@ def test_get_by_id():
     lista = add_rezervare("1", "Pop Maria", "economy plus", 199.5, "da", lista)
     lista = add_rezervare("2", "Antal Marius", "economy", 150, "da", lista)
 
-    assert get_by_id("1", lista) == ("1", "Pop Maria", "economy plus", 199.5, "da")
-    assert get_by_id("2", lista) == ("2", "Antal Marius", "economy", 150, "da")
+    assert get_by_id("1", lista) == ["1", "Pop Maria", "economy plus", 199.5, "da"]
+    assert get_by_id("2", lista) == ["2", "Antal Marius", "economy", 150, "da"]
     assert get_by_id("3", lista) is None
 
 def test_delete_rezervare():
@@ -33,10 +33,10 @@ def test_delete_rezervare():
     assert get_by_id("1", lista) is None
     assert get_by_id("2", lista) is not None
 
-    lista = delete_rezervare("3", lista)
+    lista = delete_rezervare("2", lista)
 
-    assert len(lista) == 1
-    assert get_by_id("2", lista) is not None
+    assert len(lista) == 0
+    assert get_by_id("2", lista) is None
 
 
 def test_modify_rezervare():
@@ -63,11 +63,11 @@ def test_modify_rezervare():
     lista = []
     lista = add_rezervare("1", "Pop Maria", "economy plus", 199.5, "da", lista)
 
-    lista = modify_rezervare("3", "Antal Marius", "economy", 150, "da", lista)
+    lista = modify_rezervare("1", "Antal Marius", "economy", 150, "da", lista)
 
-    nemodified_rezervare = get_by_id("1", lista)
-    assert get_id(nemodified_rezervare) == "1"
-    assert get_nume(nemodified_rezervare) == "Pop Maria"
-    assert get_clasa(nemodified_rezervare) == "economy plus"
-    assert get_pret(nemodified_rezervare) == 199.5
-    assert get_checkin(nemodified_rezervare) == "da"
+    modified_rezervare = get_by_id("1", lista)
+    assert get_id(modified_rezervare) == "1"
+    assert get_nume(modified_rezervare) == "Antal Marius"
+    assert get_clasa(modified_rezervare) == "economy"
+    assert get_pret(modified_rezervare) == 150
+    assert get_checkin(modified_rezervare) == "da"
