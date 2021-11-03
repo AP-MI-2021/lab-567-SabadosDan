@@ -18,7 +18,7 @@ def add_rezervare(id, nume, clasa, pret, checkin_facut, lista):
         raise ValueError("ID-ul introdus nu este corect ca si format!")
     if clasa != "economy" and clasa != "economy plus" and clasa != "business":
         raise ValueError("Clasa introdusa nu exista! Alegeti dintre economy, economy plus sau business)")
-    rezervare = creeaza_rezervare(id, nume, clasa, pret, checkin_facut)
+    rezervare = creeaza_rezervare(id, nume, clasa, float(pret), checkin_facut)
     return lista + [rezervare]
 
 
