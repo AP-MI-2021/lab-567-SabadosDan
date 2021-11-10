@@ -4,8 +4,10 @@ from Logic.CRUD import add_rezervare, delete_rezervare
 
 def print_menu_in_line():
     print("Utilizati comenzile: ")
-    print("    - add + valorile adecvate pentru a adauga o rezervare noua")
-    print("    - delete + id-ul rezervarii care urmeaza sa fie stearsa")
+    print("    - add + valorile adecvate pentru a adauga o rezervare noua + 2 spatii libere separate cu ','")
+    print("    - delete + id-ul rezervarii care urmeaza sa fie stearsa + 2 spatii libere separate cu ','")
+    print("   !! Cele doua spatii libere reprezinta valoarea specifica listelor undo_list, redo_list,"
+          "folosite la cealalta consola")
     print("    - showall pentru a afisa toate rezervarile")
     print("    - exit pentru a iesi din aplicatie")
     print(" ! Toate comenzile trebuie sa fie apelate pe o singura linie, separate prin ';' , ")
@@ -25,7 +27,7 @@ def add(id, nume, clasa, pret, checkin, lista):
     '''
     try:
         rezervare_noua = creeaza_rezervare(id, nume, clasa, pret, checkin)
-        lista = add_rezervare(id, nume, clasa, pret, checkin, lista)
+        lista = add_rezervare(id, nume, clasa, pret, checkin, lista, [], [])
     except ValueError as ve:
         print("Eroare:", ve)
     return lista
@@ -38,7 +40,7 @@ def delete(id, lista):
     :param lista: lista de rezervari
     :return: o lista de rezervari fara rezervarea stearsa
     '''
-    lista = delete_rezervare(id, lista)
+    lista = delete_rezervare(id, lista, [], [])
     return lista
 
 

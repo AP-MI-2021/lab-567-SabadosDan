@@ -44,7 +44,7 @@ def get_clasa(rezervare):
     return rezervare[2]
 
 
-def get_pret(rezervare):
+def get_pret(rezervare) -> float:
     '''
     da pretul unei rezervari
     :param rezervare: dictionar ce contine o rezervare

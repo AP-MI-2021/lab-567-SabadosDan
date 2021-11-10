@@ -11,11 +11,13 @@ def meniuri():
 def main():
     run_all_tests()
     lista = []
+    undo_list = []
+    redo_list = []
     while True:
         meniuri()
         optiune_meniu = input(" Alegeti meniul: ")
         if optiune_meniu == "1":
-            run_menu(lista)
+            run_menu(lista, undo_list, redo_list)
         elif optiune_meniu == "2":
             run_console_in_line(lista)
         elif optiune_meniu == "x":

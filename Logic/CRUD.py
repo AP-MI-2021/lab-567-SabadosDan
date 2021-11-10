@@ -1,7 +1,7 @@
 from Domain.rezervare import creeaza_rezervare, get_id
 
 
-def add_rezervare(id, nume, clasa, pret, checkin_facut, lista):
+def add_rezervare(id, nume, clasa, pret, checkin_facut, lista, undo_list, redo_list):
     '''
     adauga o rezervare in lista
     :param id: string
@@ -19,6 +19,8 @@ def add_rezervare(id, nume, clasa, pret, checkin_facut, lista):
     if clasa != "economy" and clasa != "economy plus" and clasa != "business":
         raise ValueError("Clasa introdusa nu exista! Alegeti dintre economy, economy plus sau business)")
     rezervare = creeaza_rezervare(id, nume, clasa, float(pret), checkin_facut)
+    undo_list.append(lista)
+    redo_list.clear()
     return lista + [rezervare]
 
 
@@ -35,7 +37,7 @@ def get_by_id(id, lista):
     return None
 
 
-def delete_rezervare(id, lista):
+def delete_rezervare(id, lista, undo_list, redo_list):
     '''
     sterge o rezervare dupa ID-ul dat dintr-o lista
     :param id: string: id-ul rezervarii care se va sterge
@@ -44,10 +46,12 @@ def delete_rezervare(id, lista):
     '''
     if get_by_id(id ,lista) is None:
         raise ValueError("Nu exista o rezervare cu ID-ul dat! ")
+    undo_list.append(lista)
+    redo_list.clear()
     return [rezervare for rezervare in lista if get_id(rezervare) != id]
 
 
-def modify_rezervare(id, nume, clasa, pret, checkin_facut, lista):
+def modify_rezervare(id, nume, clasa, pret, checkin_facut, lista, undo_list, redo_list):
     '''
     modifica o rezervare dupa ID-ul dat
     :param id: id-ul rezervarii
@@ -67,4 +71,6 @@ def modify_rezervare(id, nume, clasa, pret, checkin_facut, lista):
             lista_noua.append(rezervare_noua)
         else:
             lista_noua.append(rezervare)
+    undo_list.append(lista)
+    redo_list.clear()
     return lista_noua
